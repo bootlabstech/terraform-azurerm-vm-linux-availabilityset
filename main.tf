@@ -48,7 +48,7 @@ resource "azurerm_network_interface" "nic" {
   }
   lifecycle {
     ignore_changes = [
-      tags, boot_diagnostics
+      tags,
     ]
   }
 }
