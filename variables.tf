@@ -134,3 +134,13 @@ variable "keyvault_name" {
   type = string
   
 }
+variable "patch_assessment_mode" {
+  type = string
+  default = "ImageDefault"
+  
+}
+variable "patch_mode" {
+  type = string
+  default = "ImageDefault"
+  
+}

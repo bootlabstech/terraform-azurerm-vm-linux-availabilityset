@@ -10,6 +10,9 @@ resource "azurerm_linux_virtual_machine" "vm" {
   disable_password_authentication = var.disable_password_authentication
   source_image_id                 = var.source_image_id
   availability_set_id = var.availability_set_id
+  patch_assessment_mode = var.patch_assessment_mode
+  patch_mode = var.patch_mode
+
   # source_image_reference {
   #   publisher = var.publisher
   #   offer     = var.offer
@@ -45,7 +48,7 @@ resource "azurerm_network_interface" "nic" {
   }
   lifecycle {
     ignore_changes = [
-      tags,
+      tags, boot_diagnostics
     ]
   }
 }
