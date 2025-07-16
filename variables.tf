@@ -49,7 +49,7 @@ variable "source_image_id" {
 }
 
 variable "availability_set_id" {
-  type        = string
+  type = string
 
 }
 
@@ -99,7 +99,7 @@ variable "nsg_rules" {
     direction                  = string
     access                     = string
     protocol                   = string
-    source_address_prefix      = string
+    source_address_prefixes    = list(string)
     source_port_range          = string
     destination_address_prefix = string
     destination_port_range     = string
@@ -113,8 +113,24 @@ variable "nsg_rules" {
       name                       = "allow-https"
       priority                   = 100
       protocol                   = "Tcp"
-      source_address_prefix      = "*"
-      source_port_range          = "*"
+      source_address_prefixes = [
+        "103.21.244.0/22",
+        "103.22.200.0/22",
+        "103.31.4.0/22",
+        "104.16.0.0/13",
+        "104.24.0.0/14",
+        "108.162.192.0/18",
+        "131.0.72.0/22",
+        "141.101.64.0/18",
+        "162.158.0.0/15",
+        "172.64.0.0/13",
+        "173.245.48.0/20",
+        "188.114.96.0/20",
+        "190.93.240.0/20",
+        "197.234.240.0/22",
+        "198.41.128.0/17"
+      ]
+      source_port_range = "*"
     }
   }
 }
@@ -131,16 +147,16 @@ variable "services_vault_resource_group_name" {
 
 variable "keyvault_name" {
   description = "The Keyvault name where VM password will be stored in"
-  type = string
-  
+  type        = string
+
 }
 variable "patch_assessment_mode" {
-  type = string
+  type    = string
   default = "ImageDefault"
-  
+
 }
 variable "patch_mode" {
-  type = string
+  type    = string
   default = "ImageDefault"
-  
+
 }

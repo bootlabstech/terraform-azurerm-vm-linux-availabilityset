@@ -9,9 +9,9 @@ resource "azurerm_linux_virtual_machine" "vm" {
   admin_password                  = random_password.password.result
   disable_password_authentication = var.disable_password_authentication
   source_image_id                 = var.source_image_id
-  availability_set_id = var.availability_set_id
-  patch_assessment_mode = var.patch_assessment_mode
-  patch_mode = var.patch_mode
+  availability_set_id             = var.availability_set_id
+  patch_assessment_mode           = var.patch_assessment_mode
+  patch_mode                      = var.patch_mode
 
   # source_image_reference {
   #   publisher = var.publisher
@@ -19,7 +19,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
   #   sku       = var.sku
   #   version   = var.storage_image_version
   # }
-  
+
   os_disk {
     name                 = "${var.name}-osdisk"
     caching              = var.caching
@@ -31,7 +31,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
   ]
   lifecycle {
     ignore_changes = [
-      tags,
+      tags, boot_diagnostics
     ]
   }
 }
@@ -74,7 +74,7 @@ resource "azurerm_network_security_rule" "nsg_rules" {
   direction                   = each.value.direction
   access                      = each.value.access
   protocol                    = each.value.protocol
-  source_address_prefix       = each.value.source_address_prefix
+  source_address_prefixes     = each.value.source_address_prefixes
   source_port_range           = each.value.source_port_range
   destination_address_prefix  = each.value.destination_address_prefix
   destination_port_range      = each.value.destination_port_range
@@ -157,5 +157,5 @@ resource "azurerm_key_vault_secret" "vm_password" {
   value        = random_password.password.result
   key_vault_id = data.azurerm_key_vault.key_vault.id
 
-  depends_on = [ random_password.password ]
+  depends_on = [random_password.password]
 }
