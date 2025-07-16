@@ -19,7 +19,6 @@ resource "azurerm_linux_virtual_machine" "vm" {
   #   sku       = var.sku
   #   version   = var.storage_image_version
   # }
-
   os_disk {
     name                 = "${var.name}-osdisk"
     caching              = var.caching
